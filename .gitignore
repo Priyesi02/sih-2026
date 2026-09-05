@@ -1,0 +1,10 @@
+node_modules/
+.env
+output/*.png
+output/*.wav
+uploads/*
+!uploads/.gitkeep
+.DS_Store
+*.log
+audio.m4a
+band.jpeg

@@ -1,0 +1,27 @@
+# render.yaml
+#
+# Render "Blueprint" config — lets Render auto-configure this service
+# when you connect the GitHub repo, instead of clicking through manual
+# setup. See HANDOFF.md for the full deploy walkthrough.
+#
+# Render injects PORT automatically at runtime — server.js already reads
+# process.env.PORT (falling back to 3000 for local dev), so nothing
+# needs to be set for that here.
+
+services:
+  - type: web
+    name: artisan-ai-listing-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      # GEMINI_API_KEY is the ONLY secret this server currently needs —
+      # enhanceImage's background removal runs locally
+      # (@imgly/background-removal-node), not via an external API, so
+      # there is no background-removal API key to set. If that ever
+      # changes (e.g. swapping in a real external image API later), add
+      # its key here the same way, with sync: false.
+      - key: GEMINI_API_KEY
+        sync: false # set the real value in Render's dashboard, not here — this file is committed to git

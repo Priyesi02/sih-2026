@@ -1,0 +1,52 @@
+{
+  "trainedAt": "2026-09-05T12:02:33.184Z",
+  "featureOrder": [
+    "bamboo",
+    "embroidery",
+    "handloom textile",
+    "jewelry",
+    "leather",
+    "metal",
+    "painting",
+    "pottery",
+    "wood",
+    "qualityTier",
+    "sizeTier"
+  ],
+  "categories": [
+    "bamboo",
+    "embroidery",
+    "handloom textile",
+    "jewelry",
+    "leather",
+    "metal",
+    "painting",
+    "pottery",
+    "wood"
+  ],
+  "weights": [
+    4.668070290398951,
+    5.723817978187027,
+    6.491385744869058,
+    5.383052736949065,
+    5.82348136729712,
+    5.524730629060658,
+    6.151560624348775,
+    4.175692917725547,
+    5.636868032979214,
+    0.8916893579185878,
+    0.5455353054913363
+  ],
+  "targetTransform": "log",
+  "metrics": {
+    "train": {
+      "mape": 14.908993207686244,
+      "r2": 0.9712704723764545
+    },
+    "test": {
+      "mape": 20.155182004832557,
+      "r2": 0.9500657304785503
+    }
+  },
+  "trainingRowCount": 243
+}
