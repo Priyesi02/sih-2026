@@ -14,6 +14,7 @@ const { speakListing } = require('./lib/speakListing');
 const { runFullPipeline } = require('./lib/runFullPipeline');
 const { computeArtisanStats } = require('./lib/artisanStats');
 const { generateMockMarketplaceSync } = require('./lib/mockMarketplaceSync');
+const { generateProductVideo } = require('./lib/generateVideo');
 
 module.exports = {
   enhanceImage,
@@ -23,4 +24,5 @@ module.exports = {
   runFullPipeline,
   computeArtisanStats,
   generateMockMarketplaceSync,
+  generateProductVideo,
 };
