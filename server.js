@@ -1,12 +1,7 @@
 // server.js
 //
-// Thin HTTP layer over the AI module (index.js) — this is the piece the
-// Expo/React Native app actually talks to. None of the pipeline logic
-// lives here; every route just parses the request, calls a function
-// already exported from index.js, and serializes the result.
-//
-// See HANDOFF.md for the full request/response contract each route
-// follows, and for how this is deployed to Render.
+// HTTP layer over the AI module (index.js) with Firebase Firestore integrated
+// for persistent storage of artisan listings and records.
 
 require('dotenv').config();
 const fs = require('fs');
@@ -14,6 +9,41 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
+const admin = require('firebase-admin');
+// ---- Firebase Initialization -----------------------------------------
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
+
+const serviceAccountPath = path.join(__dirname, 'serviceAccountKey.json');
+
+// BUG FIX (found by actually starting the server without this file
+// present — it crashed the ENTIRE process, not just Firestore routes):
+// getFirestore() was called unconditionally even when initializeApp()
+// was never run, throwing an uncaught FirebaseAppError at require-time
+// and taking down image/video generation and every other route with
+// it, none of which have anything to do with Firestore. `db` is now
+// `null` when the credential file is missing, and every Firestore route
+// below checks for that and returns a clear error instead of the whole
+// server refusing to start.
+let db = null;
+
+if (!fs.existsSync(serviceAccountPath)) {
+  console.warn(
+    '[firebase] serviceAccountKey.json not found — Firestore-backed routes ' +
+      '(/api/save-listing, /api/listings, and /api/artisan-stats with a "uid") ' +
+      'will return an error. Everything else (image/video generation, TTS, ' +
+      'pricing, etc.) still works normally.'
+  );
+} else {
+  const serviceAccount = require(serviceAccountPath);
+  initializeApp({
+    credential: cert(serviceAccount),
+  });
+  db = getFirestore();
+  console.log('[firebase] initialized successfully');
+}
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
 
 const {
   runFullPipeline,
@@ -34,22 +64,10 @@ for (const dir of [UPLOADS_DIR, OUTPUT_DIR]) {
 
 // ---- Middleware ------------------------------------------------------
 
-// Permissive CORS: the Expo app runs on a phone, on a different network
-// than this server, from an origin that isn't a fixed browser origin —
-// there's no fixed list of origins to allow-list here, so allow all.
 app.use(cors());
-
-app.use(express.json({ limit: '2mb' })); // for JSON-body routes (speak-listing, stats, marketplace-sync)
-
-// Serves generated files (enhanced images, spoken audio .wav) so the
-// Expo app can actually fetch/play them — runFullPipeline/speakListing
-// return local disk paths, which get rewritten to URLs under this route
-// (see toPublicUrl below) before any JSON response goes out.
+app.use(express.json({ limit: '2mb' }));
 app.use('/output', express.static(OUTPUT_DIR));
 
-// Multer saves uploaded files to disk with their original extension
-// preserved — enhanceImage/transcribeVoice both validate by file
-// extension, so this matters.
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, UPLOADS_DIR),
@@ -58,15 +76,9 @@ const upload = multer({
       cb(null, `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`);
     },
   }),
-  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB per file, generous for a phone photo/voice note
+  limits: { fileSize: 25 * 1024 * 1024 },
 });
 
-/**
- * Converts a local absolute file path (as returned by enhanceImage/
- * speakListing) into a publicly fetchable URL under /output/, using
- * this request's own host — works whether this is running locally or
- * on Render, without hardcoding a domain anywhere.
- */
 function toPublicUrl(req, absoluteLocalPath) {
   if (!absoluteLocalPath) return null;
   const fileName = path.basename(absoluteLocalPath);
@@ -115,19 +127,13 @@ app.get('/', (req, res) => {
   res.json({ status: 'ok', service: 'artisan-ai-listing-module', message: 'See HANDOFF.md for API routes.' });
 });
 
-// Render (and uptime checks) hit this to confirm the service is alive.
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
 /**
  * POST /api/generate-listing
- * multipart/form-data with fields:
- *   image (file, required), audio (file, required),
- *   language (text, optional), category (text, optional)
- * Returns runFullPipeline's result unchanged (still { success, ... } or
- * { success: false, error }), except enhancedImageUrl is rewritten from
- * a local path to a fetchable URL.
+ * Runs the AI pipeline (photo + audio -> listing)
  */
 app.post('/api/generate-listing', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'audio', maxCount: 1 }]), async (req, res) => {
   const imageFile = req.files?.image?.[0];
@@ -155,9 +161,6 @@ app.post('/api/generate-listing', upload.fields([{ name: 'image', maxCount: 1 },
 
     res.json(result);
   } catch (err) {
-    // Only missing-argument bugs throw from runFullPipeline (see
-    // lib/runFullPipeline.js) — genuine API/network failures already
-    // come back as { success: false, error } above, not a throw.
     console.error('[server] /api/generate-listing threw:', err.message);
     res.status(500).json({ success: false, error: err.message });
   } finally {
@@ -167,12 +170,55 @@ app.post('/api/generate-listing', upload.fields([{ name: 'image', maxCount: 1 },
 });
 
 /**
+ * POST /api/save-listing
+ * Saves a draft or published listing directly to Firestore
+ */
+app.post('/api/save-listing', async (req, res) => {
+  if (!db) {
+    return res.status(503).json({ success: false, error: 'Firestore is not configured on this server (missing serviceAccountKey.json).' });
+  }
+  try {
+    const listing = req.body;
+
+    if (!listing) {
+      return res.status(400).json({ success: false, error: 'Listing payload is required.' });
+    }
+
+    const payload = {
+      ...listing,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const docRef = await db.collection('listings').add(payload);
+    res.json({ success: true, id: docRef.id, message: 'Listing saved successfully.' });
+  } catch (err) {
+    console.error('[server] /api/save-listing failed:', err.message);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
+ * GET /api/listings
+ * Fetches all published listings for the buyer marketplace view
+ */
+app.get('/api/listings', async (req, res) => {
+  if (!db) {
+    return res.status(503).json({ success: false, error: 'Firestore is not configured on this server (missing serviceAccountKey.json).' });
+  }
+  try {
+    const snapshot = await db.collection('listings').where('status', '==', 'published').get();
+    const listings = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    res.json({ success: true, listings });
+  } catch (err) {
+    console.error('[server] /api/listings failed:', err.message);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+/**
  * POST /api/speak-listing
- * JSON body: { listing: <the listing object from /api/generate-listing> }
- * Returns { url: "<public .wav URL>" } on success.
- * On failure, throws inside speakListing() propagate as a 500 — matches
- * this function's documented "throws on failure" behavior (HANDOFF.md
- * section 2.5), the frontend already expects to try/catch this call.
+ * On-demand TTS generation (max 10/day on free tier)
  */
 app.post('/api/speak-listing', async (req, res) => {
   const { listing } = req.body || {};
@@ -191,24 +237,40 @@ app.post('/api/speak-listing', async (req, res) => {
 
 /**
  * POST /api/artisan-stats
- * JSON body: { listings: [...], expectedSalesPerListing?: number }
- * No AI, instant — see lib/artisanStats.js.
+ * Supports either:
+ *  1) Direct array: { listings: [...] }
+ *  2) Database lookup by UID: { uid: "artisan_123" }
  */
-app.post('/api/artisan-stats', (req, res) => {
-  const { listings, expectedSalesPerListing } = req.body || {};
+app.post('/api/artisan-stats', async (req, res) => {
+  const { listings, uid, expectedSalesPerListing } = req.body || {};
+
   try {
-    const stats = computeArtisanStats(listings, { expectedSalesPerListing });
+    let itemsToCompute = listings;
+
+    // If frontend sends an artisan UID instead of array, pull directly from Firestore
+    if (!itemsToCompute && uid) {
+      if (!db) {
+        return res.status(503).json({ error: 'Firestore is not configured on this server (missing serviceAccountKey.json) — pass "listings" directly instead of "uid".' });
+      }
+      const snapshot = await db.collection('listings').where('artisanId', '==', uid).get();
+      itemsToCompute = snapshot.docs.map((doc) => doc.data());
+    }
+
+    if (!itemsToCompute) {
+      return res.status(400).json({ error: 'Provide either "listings" array or "uid" string in the body.' });
+    }
+
+    const stats = computeArtisanStats(itemsToCompute, { expectedSalesPerListing });
     res.json(stats);
   } catch (err) {
+    console.error('[server] /api/artisan-stats failed:', err.message);
     res.status(400).json({ error: err.message });
   }
 });
 
 /**
  * POST /api/marketplace-sync
- * JSON body: { listing: <listing object> }
- * MOCK ONLY — see lib/mockMarketplaceSync.js. No real network call ever
- * happens here, regardless of environment.
+ * Mock ONDC/GeM catalog synchronization
  */
 app.post('/api/marketplace-sync', (req, res) => {
   const { listing } = req.body || {};
