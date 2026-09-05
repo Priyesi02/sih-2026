@@ -8,3 +8,4 @@ uploads/*
 *.log
 audio.m4a
 band.jpeg
+serviceAccountKey.json
