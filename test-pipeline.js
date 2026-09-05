@@ -15,12 +15,17 @@
 // Gemini's TTS free tier caps out at just 10 requests/day, so don't burn
 // it on every quick test. See HANDOFF.md section 5.6.
 //
+// Product video (generateProductVideo) is OPT-IN via --video — no quota
+// concern (it's local ffmpeg, not an API call), just slower, so it's
+// off by default to keep quick tests quick. Combine with --speak to get
+// a video WITH narration audio.
+//
 // Usage:
-//   node test-pipeline.js <path-to-image> "<transcript text>" [category] [--speak]
+//   node test-pipeline.js <path-to-image> "<transcript text>" [category] [--speak] [--video]
 //
 // Examples:
 //   node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery
-//   node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery --speak
+//   node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery --speak --video
 
 require('dotenv').config();
 const path = require('path');
@@ -28,10 +33,12 @@ const { enhanceImage } = require('./lib/enhanceImage');
 const { generateListing } = require('./lib/generateListing');
 const { speakListing } = require('./lib/speakListing');
 const { generateMockMarketplaceSync } = require('./lib/mockMarketplaceSync');
+const { generateProductVideo } = require('./lib/generateVideo');
 
 async function main() {
-  const args = process.argv.slice(2).filter((arg) => arg !== '--speak');
+  const args = process.argv.slice(2).filter((arg) => arg !== '--speak' && arg !== '--video');
   const shouldSpeak = process.argv.includes('--speak');
+  const shouldMakeVideo = process.argv.includes('--video');
   const [imagePath, transcriptText, category] = args;
 
   if (!imagePath || !transcriptText) {
@@ -104,6 +111,24 @@ async function main() {
   console.log('schemeMatches:   ', listing.schemeMatches);
   console.log('\nmock marketplace sync (no real API call):');
   console.log(JSON.stringify(generateMockMarketplaceSync(listing), null, 2));
+
+  // ---- Optional: generate a shareable product video (--video) ----------
+  if (shouldMakeVideo) {
+    console.log('\n[Video] generateProductVideo — compositing caption + encoding MP4...');
+    console.time('[Video] generateProductVideo');
+    try {
+      const videoPath = await generateProductVideo({
+        imagePath: enhancedImageUrl,
+        listing,
+        audioPath: spokenAudioUrl || undefined, // only set if --speak was also passed
+      });
+      console.log('[Video] succeeded — output:', videoPath);
+      console.log(spokenAudioUrl ? '(includes narration audio)' : '(no narration — pass --speak too for audio)');
+    } catch (err) {
+      console.warn(`[Video] generateProductVideo FAILED ("${err.message}")`);
+    }
+    console.timeEnd('[Video] generateProductVideo');
+  }
 }
 
 main();

@@ -20,6 +20,7 @@ const {
   speakListing,
   computeArtisanStats,
   generateMockMarketplaceSync,
+  generateProductVideo,
 } = require('./index');
 
 const app = express();
@@ -72,6 +73,34 @@ function toPublicUrl(req, absoluteLocalPath) {
   return `${req.protocol}://${req.get('host')}/output/${fileName}`;
 }
 
+/**
+ * Reverses toPublicUrl: given a URL this server itself issued under
+ * /output/, resolves it back to the local file path — needed because
+ * /api/generate-video receives a listing whose enhancedImageUrl (and
+ * optionally an audioUrl) are URLs from earlier responses, not local
+ * paths, but generateProductVideo needs to read the actual files.
+ */
+function fromPublicUrl(url) {
+  if (!url) return null;
+  const fileName = path.basename(new URL(url).pathname);
+  return path.join(OUTPUT_DIR, fileName);
+}
+
+/**
+ * If enhanceImage failed inside runFullPipeline, enhancedImageUrl falls
+ * back to the ORIGINAL uploaded file — which lives in uploads/, isn't
+ * served statically, and gets deleted by cleanupUpload right after this
+ * request finishes. Copy it into output/ so the URL we hand back stays
+ * valid exactly like a normal enhanced image would. No-op if the path
+ * given is already in output/.
+ */
+function ensureServableFromOutput(localPath) {
+  if (!localPath || path.dirname(localPath) === OUTPUT_DIR) return localPath;
+  const destPath = path.join(OUTPUT_DIR, `fallback-${Date.now()}-${path.basename(localPath)}`);
+  fs.copyFileSync(localPath, destPath);
+  return destPath;
+}
+
 /** Deletes a temp uploaded file; failures here are non-fatal, just logged. */
 function cleanupUpload(filePath) {
   if (!filePath) return;
@@ -117,7 +146,11 @@ app.post('/api/generate-listing', upload.fields([{ name: 'image', maxCount: 1 },
     });
 
     if (result.success) {
-      result.enhancedImageUrl = toPublicUrl(req, result.enhancedImageUrl);
+      // ensureServableFromOutput handles the case where enhanceImage
+      // failed and fell back to the original uploaded file (which is
+      // about to be deleted below, and was never served statically) —
+      // see that function's comment.
+      result.enhancedImageUrl = toPublicUrl(req, ensureServableFromOutput(result.enhancedImageUrl));
     }
 
     res.json(result);
@@ -184,6 +217,37 @@ app.post('/api/marketplace-sync', (req, res) => {
     res.json(syncResult);
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+/**
+ * POST /api/generate-video
+ * JSON body: { listing: <listing object from /api/generate-listing, must
+ *   include enhancedImageUrl>, audioUrl?: <a .wav URL from a prior
+ *   /api/speak-listing call, for narration> }
+ * Returns { url: "<public .mp4 URL>" } on success.
+ * NOTE: audioUrl is optional and NOT fetched automatically — narration
+ * only happens if the frontend already called /api/speak-listing itself
+ * and passes that URL in. This route never calls speakListing on its
+ * own, since that would silently spend the 10-requests/day TTS quota
+ * every time a video is generated (see HANDOFF.md 5.6/2.5).
+ */
+app.post('/api/generate-video', async (req, res) => {
+  const { listing, audioUrl } = req.body || {};
+  if (!listing || !listing.enhancedImageUrl) {
+    return res.status(400).json({ error: '"listing" (including enhancedImageUrl) is required in the request body.' });
+  }
+
+  try {
+    const videoPath = await generateProductVideo({
+      imagePath: fromPublicUrl(listing.enhancedImageUrl),
+      listing,
+      audioPath: audioUrl ? fromPublicUrl(audioUrl) : undefined,
+    });
+    res.json({ url: toPublicUrl(req, videoPath) });
+  } catch (err) {
+    console.error('[server] /api/generate-video failed:', err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 

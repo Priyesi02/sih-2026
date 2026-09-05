@@ -16,6 +16,9 @@ this repo — no guessed field names.
 - `computeArtisanStats` — **not AI at all**, pure math over an artisan's
   existing listings (count + potential earnings). Instant, free, call it
   as often as you want. See section 2.6.
+- `generateProductVideo` — **not AI either**, local image compositing +
+  video encoding (no Gemini call). Optional narration audio, not
+  generated automatically. See section 2.8.
 
 **Architecture note — this is backend-only, and that's independent of
 your frontend framework choice.** Every function in this module uses
@@ -37,7 +40,17 @@ npm install
 ```
 
 Installs (from `package.json`): `@google/generative-ai`,
-`@imgly/background-removal-node`, `sharp`, `dotenv`.
+`@imgly/background-removal-node`, `sharp`, `dotenv`, `express`, `cors`,
+`multer`, `@ffmpeg-installer/ffmpeg`, `@ffprobe-installer/ffprobe`,
+`fluent-ffmpeg`.
+
+Note on the ffmpeg packages: `@ffmpeg-installer/ffmpeg` was used instead
+of the more commonly-recommended `ffmpeg-static` because `ffmpeg-static`
+downloads its binary from a GitHub releases CDN that was unreachable in
+the environment this was built in (TLS connection failure) — worth
+knowing if you ever see the same install failure elsewhere.
+`@ffmpeg-installer/ffmpeg` gets its binary from the npm registry instead
+and installed cleanly.
 
 Create a `.env` file in the project root (copy `.env.example`):
 
@@ -277,6 +290,52 @@ need one to generate a listing to feed it first):
 node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery
 ```
 (prints the mock sync result at the end, alongside the other B2B fields)
+
+## 2.8. `generateProductVideo` — shareable product video, no AI call
+
+Generates a short MP4 from the enhanced photo + the listing's own data
+(category, price, description) — a caption bar composited onto the
+photo, with a slow zoom-in effect so it reads as a video, not a frozen
+image. **No Gemini call, no API cost** — this is local image compositing
+(`sharp`) + local video encoding (`ffmpeg`, via `@ffmpeg-installer/ffmpeg`
++ `fluent-ffmpeg`, a prebuilt binary bundled through npm — no system
+`ffmpeg` install needed, works the same on Render).
+
+```js
+const { generateProductVideo } = require('./index');
+
+const videoPath = await generateProductVideo({
+  imagePath: listing.enhancedImageUrl, // or any local image path
+  listing,                              // needs category, suggestedPriceMin/Max, descriptionEn
+  audioPath: undefined,                 // optional — see below
+});
+```
+
+**`audioPath` is optional, and this function does NOT call
+`speakListing()` itself.** If you pass a path to an existing narration
+file (from a prior on-demand `speakListing()` call), it becomes the
+video's soundtrack and the video's length is trimmed to match it
+exactly. If omitted, the video defaults to a fixed 6 seconds with no
+audio track. This is deliberate — auto-generating narration here would
+silently spend `speakListing`'s 10-requests/day quota on every video,
+without you choosing that. Caller decides.
+
+**A real bug found and fixed while building this:** ffmpeg's `-shortest`
+flag does NOT reliably bound a `zoompan`-filtered looped-image video
+against a shorter audio track — tested directly, the output ran ~2.4s
+longer than the audio. Fixed by measuring the audio's exact duration
+with `ffprobe` up front and passing it as an explicit `-t`, verified to
+produce the correct length afterward.
+
+**HTTP route:** `POST /api/generate-video` — JSON body
+`{ listing, audioUrl? }` (both URLs from prior responses, not local
+paths — the server resolves them). Returns `{ url: "<public .mp4 URL>" }`.
+
+Try it:
+```bash
+node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery --video
+node test-pipeline.js ./samples/pot.jpg "Mitti ka bartan hai" pottery --speak --video  # with narration
+```
 
 ## 3. React usage snippet
 
@@ -749,6 +808,7 @@ written and assumed to work):
 | `/api/speak-listing` | POST | JSON `{ listing }` | `speakListing` |
 | `/api/artisan-stats` | POST | JSON `{ listings, expectedSalesPerListing? }` | `computeArtisanStats` |
 | `/api/marketplace-sync` | POST | JSON `{ listing }` | `generateMockMarketplaceSync` |
+| `/api/generate-video` | POST | JSON `{ listing, audioUrl? }` | `generateProductVideo` |
 
 `/api/generate-listing`'s response is `runFullPipeline`'s JSON unchanged,
 except `enhancedImageUrl` gets rewritten from a local disk path to an

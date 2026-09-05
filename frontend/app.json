@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "frontend",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-asset",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Kriya needs microphone access so you can record your craft description."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Kriya needs photo library access so you can add a product photo.",
+          "cameraPermission": "Kriya needs camera access so you can take a product photo."
+        }
+      ],
+      "expo-sharing",
+      [
+        "expo-media-library",
+        {
+          "savePhotosPermission": "Kriya needs permission to save your product video to your gallery.",
+          "photosPermission": "Kriya needs photo library access to save your product video."
+        }
+      ]
+    ]
+  }
+}

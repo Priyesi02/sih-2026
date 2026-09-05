@@ -42,6 +42,15 @@ entirely from the terminal, then import it into the React app later.
    — a local, instant mock of a govt e-marketplace (ONDC/GeM-style)
    catalog sync, matching the PRD's "mock only" scope for this feature.
    For the "B2B / Govt Marketplace" screen. See `HANDOFF.md` 2.7.
+8. `generateProductVideo({ imagePath, listing, audioPath? })` — **not AI,
+   no Gemini call** — composites a caption (category/price/description)
+   onto the product photo and encodes a short MP4 with a zoom-in effect,
+   locally via `sharp` + `ffmpeg`. Optional narration audio (not
+   generated automatically — pass in an existing `speakListing()`
+   output if you want it). See `HANDOFF.md` 2.8.
+
+Plus `server.js` — an Express HTTP layer over all of the above, for the
+Expo/React Native frontend to actually call. See `HANDOFF.md` section 6.
 
 Audio input is **mandatory** — there's no typed-text fallback. The
 artisan speaks their description; everything downstream works off the
@@ -257,6 +266,7 @@ lib/
   artisanStats.js          NOT AI — pure math for the Impact/Earnings screen
   b2bPricing.js            NOT AI — wholesale price + MOQ, computed/reference-table
   mockMarketplaceSync.js   NOT AI, NO real API call — mocked ONDC/GeM catalog sync
+  generateVideo.js         NOT AI — sharp caption compositing + ffmpeg video encoding
 scripts/
   generatePricingDataset.js  generates the synthetic pricing training data
   trainPricingModel.js       trains the regression model, writes pricingModel.weights.json
@@ -266,12 +276,12 @@ index.js               single entry point, re-exports everything
 server.js              HTTP layer over index.js — what the Expo app actually calls (see HANDOFF.md 6)
 render.yaml            Render deployment config for server.js
 test.js                CLI for the full audio-based pipeline (no TTS)
-test-pipeline.js       CLI for image + typed transcript (no audio needed; --speak for optional TTS)
+test-pipeline.js       CLI for image + typed transcript (no audio needed; --speak/--video optional)
 test-suite.js          fixed test cases against generateListing(), pass/fail table
 test-artisan-stats.js  CLI for computeArtisanStats() against mock listing data
 samples/               put your sample product photos here for test-suite.js
 uploads/               temp storage for files uploaded via server.js — cleaned up after each request
-output/                enhanced images + spoken audio .wav files get saved here
+output/                enhanced images, spoken audio .wav, and product .mp4 files get saved here
 ```
 
 ## Notes / gotchas
