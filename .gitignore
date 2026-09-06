@@ -11,3 +11,14 @@ uploads/*
 *.log
 audio.m4a
 band.jpeg
+# Loose reference/mockup images dropped at the project root while
+# building the branding (logo/background/gradient reference shots) —
+# already processed into the real, compressed app assets committed
+# under frontend/assets/brand/. These are raw duplicates, not needed
+# in version control (one is 8MB, one is an empty failed copy).
+/background.jpg
+/gradient.jpeg
+/image.png
+/login.jpeg
+/kriya 3.png
+/WhatsApp Image*.jpeg

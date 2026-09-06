@@ -1,8 +1,13 @@
 // App.tsx — navigation root.
 //
-// Structure: a native-stack Root navigator holding the 4-tab bottom
-// navigator (Home/Listings/ListCraft/Impact) plus ListingReview pushed
-// on top full-screen (no tab bar) once a listing is generated.
+// Structure: a native-stack Root navigator holding the 3-tab bottom
+// navigator (Home/List/Listings — Impact merged into Home, see
+// HomeScreen.tsx's file header) plus ListingReview pushed on top
+// full-screen (no tab bar) once a listing is generated.
+//
+// Auth gating has 3 states, not 2: logged out -> Login; logged in but
+// first-time signup with no Aadhaar decision yet -> Aadhaar (mock) step;
+// fully logged in -> the main Tabs. See AuthContext's uid/isNewUser.
 
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
@@ -18,8 +23,11 @@ import { TabBar } from './src/components/TabBar';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { ListingsScreen } from './src/screens/ListingsScreen';
 import { ListCraftScreen } from './src/screens/ListCraftScreen';
-import { ImpactScreen } from './src/screens/ImpactScreen';
 import { ListingReviewScreen } from './src/screens/ListingReviewScreen';
+import { LoginScreen } from './src/screens/LoginScreen';
+import { AadhaarScreen } from './src/screens/AadhaarScreen';
+import { AuthProvider, useAuth } from './src/auth/AuthContext';
+import { LanguageProvider } from './src/i18n/LanguageContext';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
@@ -28,10 +36,36 @@ function Tabs() {
   return (
     <Tab.Navigator tabBar={(props) => <TabBar {...props} />} screenOptions={{ headerShown: false }}>
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Listings" component={ListingsScreen} />
       <Tab.Screen name="ListCraft" component={ListCraftScreen} />
-      <Tab.Screen name="Impact" component={ImpactScreen} />
+      <Tab.Screen name="Listings" component={ListingsScreen} />
     </Tab.Navigator>
+  );
+}
+
+function RootNavigator() {
+  const { uid, isNewUser, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.background }}>
+        <ActivityIndicator color={colors.gold} size="large" />
+      </View>
+    );
+  }
+
+  return (
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {!uid ? (
+        <RootStack.Screen name="Login" component={LoginScreen} />
+      ) : isNewUser ? (
+        <RootStack.Screen name="Aadhaar" component={AadhaarScreen} />
+      ) : (
+        <>
+          <RootStack.Screen name="Tabs" component={Tabs} />
+          <RootStack.Screen name="ListingReview" component={ListingReviewScreen} options={{ presentation: 'modal' }} />
+        </>
+      )}
+    </RootStack.Navigator>
   );
 }
 
@@ -54,12 +88,13 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar style="dark" />
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="Tabs" component={Tabs} />
-        <RootStack.Screen name="ListingReview" component={ListingReviewScreen} options={{ presentation: 'modal' }} />
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <LanguageProvider>
+      <AuthProvider>
+        <NavigationContainer>
+          <StatusBar style="dark" />
+          <RootNavigator />
+        </NavigationContainer>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }

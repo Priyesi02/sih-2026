@@ -1,12 +1,20 @@
 // src/components/MarketplaceBadge.tsx
 //
-// The small "GeM" / "ONDC" / "Craftmark" pill badges used on the Home
-// screen's "Connected marketplaces" list and on each listing card.
+// The small "GeM" / "ONDC" / "Craftmark" pill badge used on the Home
+// screen's "Connected marketplaces" list.
+//
+// NOTE: a per-listing, per-network sync-status version of this (colored
+// dots showing GeM/ONDC/Craftmark each independently as live/review/
+// draft) used to live here too, matching the original design
+// screenshots. Removed — no backend anywhere tracks per-network sync
+// status (lib/mockMarketplaceSync.js returns one combined mock result,
+// not three independent ones), so showing that would have displayed
+// fabricated per-network state as if it were real. See
+// ListingsScreen.tsx's file header for the full explanation.
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors, radii, fonts } from '../theme';
-import type { SyncStatus } from '../data/mockListings';
 
 type Network = 'gem' | 'ondc' | 'craftmark';
 
@@ -16,29 +24,12 @@ const NETWORK_LABEL: Record<Network, string> = {
   craftmark: 'Craftmark',
 };
 
-const STATUS_COLOR: Record<SyncStatus, string> = {
-  live: colors.statusLive,
-  review: colors.statusReview,
-  draft: colors.statusDraft,
-  rejected: colors.statusRejected,
-};
-
 /** Full pill badge (colored background + name) — used in the "Connected marketplaces" list. */
 export function MarketplacePill({ network }: { network: Network }) {
   const palette = colors[network];
   return (
     <View style={[styles.pill, { backgroundColor: palette.bg }]}>
       <Text style={[styles.pillText, { color: palette.text }]}>{NETWORK_LABEL[network]}</Text>
-    </View>
-  );
-}
-
-/** Small label + colored status dot — used on listing cards to show per-network sync state. */
-export function MarketplaceSyncDot({ network, status }: { network: Network; status: SyncStatus }) {
-  return (
-    <View style={styles.dotRow}>
-      <View style={[styles.dot, { backgroundColor: STATUS_COLOR[status] }]} />
-      <Text style={styles.dotLabel}>{NETWORK_LABEL[network]}</Text>
     </View>
   );
 }
@@ -53,20 +44,5 @@ const styles = StyleSheet.create({
   pillText: {
     fontFamily: fonts.bodyBold,
     fontSize: 13,
-  },
-  dotRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  dot: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-  },
-  dotLabel: {
-    fontFamily: fonts.bodyMedium,
-    fontSize: 12,
-    color: colors.textBody,
   },
 });

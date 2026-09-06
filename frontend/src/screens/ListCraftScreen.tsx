@@ -10,16 +10,34 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useAudioRecorder, useAudioRecorderState, RecordingPresets, requestRecordingPermissionsAsync, setAudioModeAsync } from 'expo-audio';
-import { Camera, Mic, Square } from 'lucide-react-native';
+import { Camera, Mic, Square, ArrowLeft } from 'lucide-react-native';
 import { colors, spacing, radii, fonts } from '../theme';
 import { Card } from '../components/Card';
 import { generateListing } from '../api/client';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
+  const { t } = useLanguage();
   const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [audioUri, setAudioUri] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  // "List" is a tab, not a pushed screen, so there's no navigation back
+  // stack to pop — the back arrow just returns to Home. If the artisan
+  // has already added a photo or recording, confirm first rather than
+  // silently losing that progress (there's no listing object yet at
+  // this stage to save as a draft — that only exists after Generate).
+  function handleBack() {
+    if (photoUri || audioUri) {
+      Alert.alert(t('discardProgressTitle'), t('discardProgressMessage'), [
+        { text: t('keepEditingButton'), style: 'cancel' },
+        { text: t('discardButton'), style: 'destructive', onPress: () => navigation.navigate('Home') },
+      ]);
+    } else {
+      navigation.navigate('Home');
+    }
+  }
 
   // expo-audio (NOT expo-av, which React Native Directory flags as
   // unmaintained — caught by `npx expo-doctor` while building this).
@@ -28,23 +46,23 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
 
   async function handleAddPhoto() {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    Alert.alert('Add a photo', 'Choose a source', [
+    Alert.alert(t('addPhotoTitle'), t('chooseSource'), [
       {
-        text: 'Camera',
+        text: t('cameraOption'),
         onPress: async () => {
-          if (status !== 'granted') return Alert.alert('Camera access is needed to take a photo.');
+          if (status !== 'granted') return Alert.alert(t('cameraPermissionNeeded'));
           const result = await ImagePicker.launchCameraAsync({ quality: 0.8 });
           if (!result.canceled) setPhotoUri(result.assets[0].uri);
         },
       },
       {
-        text: 'Gallery',
+        text: t('galleryOption'),
         onPress: async () => {
           const result = await ImagePicker.launchImageLibraryAsync({ quality: 0.8 });
           if (!result.canceled) setPhotoUri(result.assets[0].uri);
         },
       },
-      { text: 'Cancel', style: 'cancel' },
+      { text: t('cancel'), style: 'cancel' },
     ]);
   }
 
@@ -57,7 +75,7 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
 
     const { granted } = await requestRecordingPermissionsAsync();
     if (!granted) {
-      Alert.alert('Microphone access is needed to record your description.');
+      Alert.alert(t('micPermissionNeeded'));
       return;
     }
     await setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
@@ -71,12 +89,12 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
     try {
       const listing = await generateListing({ imageUri: photoUri, audioUri });
       if (!listing.success) {
-        Alert.alert('Something went wrong', listing.error || 'Please try again.');
+        Alert.alert(t('somethingWentWrong'), listing.error || t('pleaseTryAgain'));
         return;
       }
       navigation.navigate('ListingReview', { listing, originalPhotoUri: photoUri });
     } catch (err: any) {
-      Alert.alert('Could not reach the server', err.message);
+      Alert.alert(t('couldNotReachServer'), err.message);
     } finally {
       setIsGenerating(false);
     }
@@ -84,8 +102,12 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={{ padding: spacing.md, paddingTop: 60, paddingBottom: spacing.xl }}>
-      <Text style={styles.heading}>List your craft</Text>
-      <Text style={styles.subtitle}>Photo + voice → AI builds your listing automatically</Text>
+      <TouchableOpacity style={styles.backButton} onPress={handleBack} hitSlop={8}>
+        <ArrowLeft size={22} color={colors.textHeading} />
+      </TouchableOpacity>
+
+      <Text style={styles.heading}>{t('listCraftHeading')}</Text>
+      <Text style={styles.subtitle}>{t('listCraftSubtitle')}</Text>
 
       {/* Step 1: photo */}
       <Card style={{ marginTop: spacing.md }}>
@@ -94,8 +116,8 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
             <Text style={styles.stepBadgeText}>1</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.stepTitle}>Add a photo</Text>
-            <Text style={styles.stepSubtitle}>Use natural light — let the craft fill the frame</Text>
+            <Text style={styles.stepTitle}>{t('addPhotoTitle')}</Text>
+            <Text style={styles.stepSubtitle}>{t('addPhotoSubtitle')}</Text>
           </View>
         </View>
 
@@ -107,8 +129,8 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
               <View style={styles.iconCircle}>
                 <Camera size={22} color={colors.gold} />
               </View>
-              <Text style={styles.photoBoxTitle}>Tap to add photo</Text>
-              <Text style={styles.photoBoxSubtitle}>Camera or gallery</Text>
+              <Text style={styles.photoBoxTitle}>{t('tapToAddPhoto')}</Text>
+              <Text style={styles.photoBoxSubtitle}>{t('cameraOrGallery')}</Text>
             </>
           )}
         </TouchableOpacity>
@@ -121,8 +143,8 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
             <Text style={styles.stepBadgeText}>2</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.stepTitle}>Describe your craft</Text>
-            <Text style={styles.stepSubtitle}>Speak in any language — AI will refine it</Text>
+            <Text style={styles.stepTitle}>{t('describeCraftTitle')}</Text>
+            <Text style={styles.stepSubtitle}>{t('describeCraftSubtitle')}</Text>
           </View>
         </View>
 
@@ -136,11 +158,7 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
           </View>
         </TouchableOpacity>
         <Text style={styles.micHint}>
-          {recorderState.isRecording
-            ? 'Recording... tap to stop'
-            : audioUri
-              ? 'Recorded ✓ — tap to re-record'
-              : 'Tap to start recording'}
+          {recorderState.isRecording ? t('recordingStop') : audioUri ? t('recordedRerecord') : t('tapToRecord')}
         </Text>
       </Card>
 
@@ -152,16 +170,27 @@ export function ListCraftScreen({ navigation }: { navigation: NativeStackNavigat
         {isGenerating ? (
           <ActivityIndicator color={colors.textOnDark} />
         ) : (
-          <Text style={styles.generateButtonText}>Generate Listing</Text>
+          <Text style={styles.generateButtonText}>{t('generateListingButton')}</Text>
         )}
       </TouchableOpacity>
-      {isGenerating && <Text style={styles.generatingHint}>This takes ~5-10 seconds...</Text>}
+      {isGenerating && <Text style={styles.generatingHint}>{t('generatingHint')}</Text>}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.sm,
+  },
   heading: { fontFamily: fonts.heading, fontSize: 28, color: colors.textHeading },
   subtitle: { fontFamily: fonts.body, fontSize: 14, color: colors.textBody, marginTop: 4 },
   stepHeader: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },

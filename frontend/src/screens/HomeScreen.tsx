@@ -1,103 +1,174 @@
 // src/screens/HomeScreen.tsx
 //
-// Matches the "KRIYA" home screen from the design: mission statement,
-// stats row, connected marketplaces, "how it works" steps, testimonial,
-// and two CTA buttons.
+// Merged Home + Impact (per explicit request — the original 4-tab
+// layout became Home / List / Listings, with Impact folded into Home).
+// Trimmed way down from the original design screenshot: kept only the
+// brand header, the artisan's own impact numbers (earnings, green
+// rating, live listings), "How it works", and the 2 CTA buttons at the
+// bottom. Removed: the "Our Mission" card, the 3 stat boxes
+// (Artisans/Marketplaces/Items synced — vanity numbers with no real
+// backing data), the "Connected marketplaces" list, and the testimonial/
+// review card — all per explicit request to cut down the amount of text
+// on this screen.
 //
-// NOTE: the exact mandala/pattern background art and the KRIYA logo
-// mark from the design aren't image assets I have access to — this
-// approximates the header with the gold color + wordmark. Drop the real
-// logo/pattern PNG into src/assets/ and swap it in when available.
+// Impact numbers are REAL, fetched from GET /api/listings?uid=<uid> +
+// POST /api/artisan-stats, scoped to the logged-in artisan (see
+// AuthContext) — not mock/vanity numbers.
 
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { Heart, Users, Globe, Package, Mic, RefreshCw, Star } from 'lucide-react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, ImageBackground, TouchableOpacity, ActivityIndicator, Alert, RefreshControl } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Mic, RefreshCw, Package, LogOut, Info } from 'lucide-react-native';
 import { colors, spacing, radii, fonts } from '../theme';
 import { Card } from '../components/Card';
-import { MarketplacePill } from '../components/MarketplaceBadge';
+import { getArtisanStats, getListings, ArtisanStats, Listing } from '../api/client';
+import { useAuth } from '../auth/AuthContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const STATS = [
-  { icon: Users, value: '240+', label: 'Artisans' },
-  { icon: Globe, value: '3', label: 'Marketplaces' },
-  { icon: Package, value: '4.8K', label: 'Items synced' },
-];
-
 const HOW_IT_WORKS = [
-  {
-    step: '01',
-    icon: Mic,
-    title: 'Speak your listing',
-    body: 'Record a voice description. AI refines it — no typing needed.',
-  },
-  {
-    step: '02',
-    icon: RefreshCw,
-    title: 'Auto-sync',
-    body: 'Your listing is pushed to GeM, ONDC, and Craftmark automatically.',
-  },
-  {
-    step: '03',
-    icon: Package,
-    title: 'Receive orders',
-    body: 'Government buyers find and order directly. You fulfill and earn.',
-  },
-];
+  { step: '01', icon: Mic, titleKey: 'howItWorksStep1Title', bodyKey: 'howItWorksStep1Body' },
+  { step: '02', icon: RefreshCw, titleKey: 'howItWorksStep2Title', bodyKey: 'howItWorksStep2Body' },
+  { step: '03', icon: Package, titleKey: 'howItWorksStep3Title', bodyKey: 'howItWorksStep3Body' },
+] as const;
 
 export function HomeScreen({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
+  const { uid, phoneNumber, logout } = useAuth();
+  const { t } = useLanguage();
+  const [stats, setStats] = useState<ArtisanStats | null>(null);
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const load = useCallback(
+    async (isRefresh = false) => {
+      if (!uid) return;
+      if (isRefresh) setRefreshing(true);
+      setError(null);
+      try {
+        const listingsResult = await getListings(uid);
+        if (!listingsResult.success) {
+          setError(listingsResult.error || 'Could not load listings.');
+          return;
+        }
+        setListings(listingsResult.listings);
+
+        const statsResult = await getArtisanStats(listingsResult.listings as any);
+        setStats(statsResult);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        if (isRefresh) setRefreshing(false);
+      }
+    },
+    [uid]
+  );
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => load());
+    return unsubscribe;
+  }, [navigation, load]);
+
+  function handleLogout() {
+    Alert.alert(t('logout'), phoneNumber ? `${t('logout')} — ${phoneNumber}?` : `${t('logout')}?`, [
+      { text: t('cancel'), style: 'cancel' },
+      { text: t('logout'), style: 'destructive', onPress: logout },
+    ]);
+  }
+
+  function handleGreenRatingInfo() {
+    Alert.alert(t('greenRating'), t('greenRatingInfo'));
+  }
+
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: spacing.xl }}>
-      {/* Header / brand banner */}
-      <View style={styles.header}>
-        <Text style={styles.logoMark}>K</Text>
-        <Text style={styles.wordmark}>KRIYA</Text>
-      </View>
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={{ paddingBottom: spacing.xl }}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => load(true)} tintColor={colors.gold} />}
+    >
+      {/* Header / brand banner — the patterned image fills from the very
+          top of the page down through the header, fading via the
+          gradient overlay into the plain page background by just below
+          the logo (per reference), rather than a solid color block. */}
+      <ImageBackground
+        source={require('../../assets/brand/home-header-pattern.jpg')}
+        style={styles.header}
+        resizeMode="cover"
+      >
+        <LinearGradient colors={['transparent', colors.background]} locations={[0.35, 1]} style={StyleSheet.absoluteFill} />
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <LogOut size={18} color={colors.goldDark} />
+        </TouchableOpacity>
+        <Image source={require('../../assets/brand/logo.png')} style={styles.logoImage} resizeMode="contain" />
+      </ImageBackground>
 
       <View style={styles.content}>
-        {/* Mission card */}
-        <Card style={{ marginTop: -spacing.lg }}>
-          <View style={styles.rowCenter}>
-            <Heart size={16} color={colors.gold} fill={colors.gold} />
-            <Text style={styles.eyebrow}>OUR MISSION</Text>
+        {!stats || error ? (
+          <View style={styles.loadingBox}>
+            {error ? (
+              <Text style={styles.errorText}>{error}</Text>
+            ) : (
+              <ActivityIndicator color={colors.gold} size="large" style={{ marginTop: -spacing.lg }} />
+            )}
           </View>
-          <Text style={styles.heading}>Putting artisan crafts on government procurement platforms</Text>
-          <Text style={styles.body}>
-            Marginalized artisans lose out on bulk government procurement because registration is complex and
-            digital. We handle it — artisans speak their listing, we sync it to GeM, ONDC and Craftmark
-            automatically.
-          </Text>
-        </Card>
-
-        {/* Stats row */}
-        <View style={[styles.rowBetween, { marginTop: spacing.md }]}>
-          {STATS.map((s) => (
-            <Card key={s.label} style={styles.statCard}>
-              <s.icon size={20} color={colors.gold} />
-              <Text style={styles.statValue}>{s.value}</Text>
-              <Text style={styles.statLabel}>{s.label}</Text>
-            </Card>
-          ))}
-        </View>
-
-        {/* Connected marketplaces */}
-        <Text style={styles.sectionHeading}>Connected marketplaces</Text>
-        {[
-          { network: 'gem' as const, name: 'Government e-Marketplace', subtitle: 'Central govt. procurement' },
-          { network: 'ondc' as const, name: 'Open Network for Digital Commerce', subtitle: 'National digital commerce' },
-          { network: 'craftmark' as const, name: 'Craftmark India', subtitle: 'Handloom & handicraft board' },
-        ].map((m) => (
-          <Card key={m.network} style={[styles.marketplaceRow, { marginTop: spacing.sm }]}>
-            <MarketplacePill network={m.network} />
-            <View style={{ flex: 1, marginLeft: spacing.sm }}>
-              <Text style={styles.marketplaceName}>{m.name}</Text>
-              <Text style={styles.marketplaceSubtitle}>{m.subtitle}</Text>
+        ) : (
+          <>
+            {/* Stat boxes now come FIRST, Earnings card below them. */}
+            <View style={[styles.statsRow, { marginTop: -spacing.lg }]}>
+              <Card style={styles.statBox}>
+                <Text style={styles.statValue}>{stats.totalListings}</Text>
+                <Text style={styles.statLabel}>{t('statTotal')}</Text>
+              </Card>
+              <Card style={styles.statBox}>
+                <Text style={styles.statValue}>{stats.publishedListings}</Text>
+                <Text style={styles.statLabel}>{t('statPublished')}</Text>
+              </Card>
+              <Card style={styles.statBox}>
+                <View style={styles.greenRatingHeader}>
+                  <Text style={styles.statLabel}>{t('greenRating')}</Text>
+                  <TouchableOpacity onPress={handleGreenRatingInfo} hitSlop={8}>
+                    <Info size={12} color={colors.textBody} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.ecoStatValue}>{stats.sellerEcoBadge}</Text>
+              </Card>
             </View>
-            <View style={styles.liveDot} />
-          </Card>
-        ))}
+            {stats.sellerEcoScore !== null && (
+              <Text style={styles.ecoCaption}>{stats.sellerEcoLabel} ({stats.ratedListingCount} {t('listingsRated')})</Text>
+            )}
+
+            {/* No earnings/"sold" card here anymore — removed entirely
+                on request. There's no real payment/order system in this
+                app, so any earnings figure (projected OR a mock
+                "actual" one driven by a simulated units-sold count)
+                would be a fabricated number, not real data. */}
+
+            {listings.length > 0 && (
+              <>
+                <Text style={styles.sectionHeading}>{t('myListings')}</Text>
+                {listings.slice(0, 3).map((l, i) => (
+                  <Card key={l.id || i} style={styles.liveListingRow}>
+                    {l.enhancedImageUrl ? (
+                      <Image source={{ uri: l.enhancedImageUrl }} style={styles.liveListingImage} />
+                    ) : (
+                      <View style={[styles.liveListingImage, { backgroundColor: colors.cardBorder }]} />
+                    )}
+                    <View style={{ flex: 1, marginLeft: spacing.sm }}>
+                      <Text style={styles.liveListingTitle} numberOfLines={1}>{l.title || l.category}</Text>
+                      <Text style={styles.liveListingPrice}>
+                        ₹{l.suggestedPriceMin?.toLocaleString('en-IN')} – ₹{l.suggestedPriceMax?.toLocaleString('en-IN')}
+                      </Text>
+                    </View>
+                    {l.ecoBadge && <Text style={styles.cardEcoBadge}>{l.ecoBadge}</Text>}
+                  </Card>
+                ))}
+              </>
+            )}
+          </>
+        )}
 
         {/* How it works */}
-        <Text style={styles.sectionHeading}>How it works</Text>
+        <Text style={styles.sectionHeading}>{t('howItWorks')}</Text>
         {HOW_IT_WORKS.map((s) => (
           <Card key={s.step} style={[styles.howItWorksRow, { marginTop: spacing.sm }]}>
             <View style={styles.iconCircle}>
@@ -105,39 +176,20 @@ export function HomeScreen({ navigation }: { navigation: NativeStackNavigationPr
             </View>
             <View style={{ flex: 1, marginLeft: spacing.sm }}>
               <Text style={styles.howItWorksTitle}>
-                {s.step} · {s.title}
+                {s.step} · {t(s.titleKey)}
               </Text>
-              <Text style={styles.marketplaceSubtitle}>{s.body}</Text>
+              <Text style={styles.howItWorksBody}>{t(s.bodyKey)}</Text>
             </View>
           </Card>
         ))}
 
-        {/* Testimonial */}
-        <View style={styles.testimonialCard}>
-          <Image
-            source={{ uri: 'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?w=600' }}
-            style={StyleSheet.absoluteFill}
-          />
-          <View style={styles.testimonialOverlay}>
-            <View style={styles.rowCenter}>
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} color={colors.gold} fill={colors.gold} />
-              ))}
-            </View>
-            <Text style={styles.testimonialQuote}>
-              "I had no idea government buyers could find me. Now I get bulk orders every month."
-            </Text>
-            <Text style={styles.testimonialAuthor}>— Abena M., Volta Region</Text>
-          </View>
-        </View>
-
         {/* CTAs */}
         <TouchableOpacity style={styles.primaryButton} onPress={() => navigation.navigate('ListCraft')}>
           <Mic size={18} color={colors.textOnDark} />
-          <Text style={styles.primaryButtonText}>List a craft now</Text>
+          <Text style={styles.primaryButtonText}>{t('listCraftButton')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.secondaryButton} onPress={() => navigation.navigate('Listings')}>
-          <Text style={styles.secondaryButtonText}>Browse all crafts →</Text>
+          <Text style={styles.secondaryButtonText}>{t('browseCraftsButton')}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -152,85 +204,38 @@ const styles = StyleSheet.create({
     paddingBottom: 70,
     alignItems: 'center',
   },
-  logoMark: {
-    fontFamily: fonts.heading,
-    fontSize: 40,
-    color: colors.goldDark,
-  },
-  wordmark: {
-    fontFamily: fonts.heading,
-    fontSize: 24,
-    letterSpacing: 4,
-    color: colors.textHeading,
-    marginTop: spacing.xs,
-  },
-  content: { paddingHorizontal: spacing.md },
-  rowCenter: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  rowBetween: { flexDirection: 'row', gap: spacing.sm },
-  eyebrow: {
-    fontFamily: fonts.bodyBold,
-    fontSize: 12,
-    color: colors.gold,
-    letterSpacing: 1,
-  },
-  heading: {
-    fontFamily: fonts.heading,
-    fontSize: 24,
-    color: colors.textHeading,
-    marginTop: spacing.sm,
-    lineHeight: 32,
-  },
-  body: {
-    fontFamily: fonts.body,
-    fontSize: 14,
-    color: colors.textBody,
-    marginTop: spacing.sm,
-    lineHeight: 21,
-  },
-  statCard: { flex: 1, alignItems: 'center', gap: 4, paddingVertical: spacing.md },
-  statValue: { fontFamily: fonts.heading, fontSize: 20, color: colors.textHeading },
-  statLabel: { fontFamily: fonts.body, fontSize: 12, color: colors.textBody },
-  sectionHeading: {
-    fontFamily: fonts.heading,
-    fontSize: 20,
-    color: colors.textHeading,
-    marginTop: spacing.lg,
-    marginBottom: spacing.xs,
-  },
-  marketplaceRow: { flexDirection: 'row', alignItems: 'center' },
-  marketplaceName: { fontFamily: fonts.bodySemibold, fontSize: 15, color: colors.textHeading },
-  marketplaceSubtitle: { fontFamily: fonts.body, fontSize: 13, color: colors.textBody, marginTop: 2 },
-  liveDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.statusLive },
-  howItWorksRow: { flexDirection: 'row', alignItems: 'center' },
-  iconCircle: {
+  logoutButton: {
+    position: 'absolute',
+    top: 60,
+    right: spacing.md,
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: colors.goldLight,
+    backgroundColor: colors.card,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoImage: { width: 110, height: 110 },
+  content: { paddingHorizontal: spacing.md },
+  loadingBox: { marginTop: -spacing.lg, height: 160, alignItems: 'center', justifyContent: 'center' },
+  errorText: { fontFamily: fonts.bodySemibold, fontSize: 14, color: colors.statusRejected, textAlign: 'center' },
+  statsRow: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.md },
+  statBox: { flex: 1, alignItems: 'center', gap: 4, paddingVertical: spacing.md },
+  statValue: { fontFamily: fonts.heading, fontSize: 22, color: colors.textHeading },
+  ecoStatValue: { fontSize: 22 },
+  statLabel: { fontFamily: fonts.body, fontSize: 11, color: colors.textBody },
+  greenRatingHeader: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  ecoCaption: { fontFamily: fonts.body, fontSize: 12, color: colors.textBody, textAlign: 'center', marginTop: spacing.xs },
+  sectionHeading: { fontFamily: fonts.heading, fontSize: 20, color: colors.textHeading, marginTop: spacing.lg, marginBottom: spacing.xs },
+  liveListingRow: { flexDirection: 'row', alignItems: 'center', marginTop: spacing.sm },
+  liveListingImage: { width: 50, height: 50, borderRadius: radii.sm },
+  liveListingTitle: { fontFamily: fonts.bodySemibold, fontSize: 14, color: colors.textHeading },
+  liveListingPrice: { fontFamily: fonts.body, fontSize: 13, color: colors.textBody, marginTop: 2 },
+  cardEcoBadge: { fontSize: 20 },
+  howItWorksRow: { flexDirection: 'row', alignItems: 'center' },
+  iconCircle: { width: 36, height: 36, borderRadius: 18, backgroundColor: colors.goldLight, alignItems: 'center', justifyContent: 'center' },
   howItWorksTitle: { fontFamily: fonts.bodySemibold, fontSize: 14, color: colors.textHeading },
-  testimonialCard: {
-    height: 160,
-    borderRadius: radii.md,
-    overflow: 'hidden',
-    marginTop: spacing.lg,
-  },
-  testimonialOverlay: {
-    flex: 1,
-    backgroundColor: colors.overlayDark,
-    padding: spacing.md,
-    justifyContent: 'flex-end',
-    gap: 6,
-  },
-  testimonialQuote: {
-    fontFamily: fonts.body,
-    fontStyle: 'italic',
-    fontSize: 14,
-    color: colors.textOnDark,
-  },
-  testimonialAuthor: { fontFamily: fonts.bodyMedium, fontSize: 12, color: colors.textOnDark },
+  howItWorksBody: { fontFamily: fonts.body, fontSize: 13, color: colors.textBody, marginTop: 2 },
   primaryButton: {
     flexDirection: 'row',
     gap: 8,

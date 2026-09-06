@@ -1,30 +1,39 @@
 // src/components/TabBar.tsx
 //
-// Custom bottom tab bar matching the design: 3 normal tabs + a raised
-// circular "List" button in the middle. The center button is gold when
-// you're NOT on the List screen (drawing attention as the primary CTA)
-// and switches to dark when you ARE on it (showing "you're here").
+// Custom bottom tab bar: Home (left) / List (raised center FAB) /
+// Listings (right) — Impact was merged into Home, so this is 3 tabs
+// total now, not 4 (see App.tsx's Tab.Navigator + HomeScreen.tsx's file
+// header). The center button is gold when you're NOT on the List screen
+// (drawing attention as the primary CTA) and switches to dark when you
+// ARE on it (showing "you're here").
 
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Home, Package, Plus, TrendingUp } from 'lucide-react-native';
+import { Home, Package, Plus } from 'lucide-react-native';
 import { colors, fonts } from '../theme';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const TAB_ICONS: Record<string, any> = {
   Home: Home,
   Listings: Package,
-  Impact: TrendingUp,
+};
+
+const TAB_LABEL_KEYS: Record<string, 'tabHome' | 'tabListings'> = {
+  Home: 'tabHome',
+  Listings: 'tabListings',
 };
 
 export function TabBar({ state, navigation }: BottomTabBarProps) {
+  const { t } = useLanguage();
+
   return (
     <View style={styles.container}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
 
         if (route.name === 'ListCraft') {
-          // The raised center FAB — visually distinct from the other 3 tabs.
+          // The raised center FAB — visually distinct from the other 2 tabs.
           return (
             <TouchableOpacity
               key={route.key}
@@ -35,7 +44,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
               <View style={[styles.fab, { backgroundColor: isFocused ? colors.textHeading : colors.gold }]}>
                 <Plus color={colors.textOnDark} size={26} />
               </View>
-              <Text style={[styles.label, isFocused && styles.labelActive]}>List</Text>
+              <Text style={[styles.label, isFocused && styles.labelActive]}>{t('tabList')}</Text>
             </TouchableOpacity>
           );
         }
@@ -49,7 +58,7 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
             activeOpacity={0.7}
           >
             <Icon color={isFocused ? colors.gold : colors.textBody} size={24} />
-            <Text style={[styles.label, isFocused && styles.labelActive]}>{route.name}</Text>
+            <Text style={[styles.label, isFocused && styles.labelActive]}>{t(TAB_LABEL_KEYS[route.name] ?? 'tabHome')}</Text>
           </TouchableOpacity>
         );
       })}

@@ -14,7 +14,10 @@ const { speakListing } = require('./lib/speakListing');
 const { runFullPipeline } = require('./lib/runFullPipeline');
 const { computeArtisanStats } = require('./lib/artisanStats');
 const { generateMockMarketplaceSync } = require('./lib/mockMarketplaceSync');
-const { generateProductVideo } = require('./lib/generateVideo');
+const { generateProductPoster } = require('./lib/generatePoster');
+const { applyAdaptivePricing } = require('./lib/adaptivePricing');
+const { computeEcoRatingLabel, computeSellerEcoRating } = require('./lib/ecoRating');
+const { sendOtp, verifyOtp } = require('./lib/auth');
 
 module.exports = {
   enhanceImage,
@@ -24,5 +27,10 @@ module.exports = {
   runFullPipeline,
   computeArtisanStats,
   generateMockMarketplaceSync,
-  generateProductVideo,
+  generateProductPoster,
+  applyAdaptivePricing,
+  computeEcoRatingLabel,
+  computeSellerEcoRating,
+  sendOtp,
+  verifyOtp,
 };

@@ -3,7 +3,13 @@
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 63
+    "priceInr": 80
+  },
+  {
+    "category": "pottery",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 89
   },
   {
     "category": "pottery",
@@ -14,158 +20,146 @@
   {
     "category": "pottery",
     "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 55
+    "sizeTier": 1,
+    "priceInr": 130
   },
   {
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 102
+    "priceInr": 142
   },
   {
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 112
-  },
-  {
-    "category": "pottery",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 145
+    "priceInr": 185
   },
   {
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 215
+    "priceInr": 274
   },
   {
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 171
+    "priceInr": 217
   },
   {
     "category": "pottery",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 203
+    "priceInr": 258
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 81
+    "priceInr": 103
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 144
+    "priceInr": 183
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 153
+    "priceInr": 195
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 276
+    "priceInr": 351
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 233
+    "priceInr": 297
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 260
+    "priceInr": 331
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 475
+    "priceInr": 605
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 434
+    "priceInr": 553
   },
   {
     "category": "pottery",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 328
+    "priceInr": 418
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 646
+    "priceInr": 823
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 393
+    "priceInr": 500
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 385
+    "priceInr": 490
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 685
+    "priceInr": 872
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 805
+    "priceInr": 1025
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 786
+    "priceInr": 1000
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 1299
+    "priceInr": 1653
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 1152
+    "priceInr": 1466
   },
   {
     "category": "pottery",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 1322
-  },
-  {
-    "category": "handloom textile",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 763
+    "priceInr": 1682
   },
   {
     "category": "handloom textile",
@@ -177,1284 +171,1452 @@
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 751
+    "priceInr": 630
+  },
+  {
+    "category": "handloom textile",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 683
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 1655
+    "priceInr": 1504
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 978
+    "priceInr": 889
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 1364
+    "priceInr": 1240
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 2099
+    "priceInr": 1908
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 2217
+    "priceInr": 2015
   },
   {
     "category": "handloom textile",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 2362
+    "priceInr": 2147
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 1423
+    "priceInr": 1293
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 1797
+    "priceInr": 1634
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 1517
+    "priceInr": 1379
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1855
+    "priceInr": 1686
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1834
+    "priceInr": 1667
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 2137
+    "priceInr": 1943
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 3257
+    "priceInr": 2961
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 3951
+    "priceInr": 3592
   },
   {
     "category": "handloom textile",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 4122
+    "priceInr": 3747
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 3724
+    "priceInr": 3386
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 5420
+    "priceInr": 4927
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 4272
+    "priceInr": 3883
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 8152
+    "priceInr": 7411
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 5418
+    "priceInr": 4925
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 7977
+    "priceInr": 7252
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 14052
+    "priceInr": 12774
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 13314
+    "priceInr": 12103
   },
   {
     "category": "handloom textile",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 11085
+    "priceInr": 10077
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 197
+    "priceInr": 337
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 245
+    "priceInr": 420
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 258
-  },
-  {
-    "category": "jewelry",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 408
-  },
-  {
-    "category": "jewelry",
-    "qualityTier": 0,
-    "sizeTier": 1,
     "priceInr": 442
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 364
+    "priceInr": 700
+  },
+  {
+    "category": "jewelry",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 758
+  },
+  {
+    "category": "jewelry",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 624
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 687
+    "priceInr": 1178
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 788
+    "priceInr": 1352
   },
   {
     "category": "jewelry",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 724
+    "priceInr": 1242
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 361
+    "priceInr": 620
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 547
+    "priceInr": 937
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 407
+    "priceInr": 697
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 674
+    "priceInr": 1156
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 870
+    "priceInr": 1492
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 908
+    "priceInr": 1557
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 1517
+    "priceInr": 2600
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 1484
+    "priceInr": 2544
   },
   {
     "category": "jewelry",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 1241
+    "priceInr": 2127
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 1184
+    "priceInr": 2030
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 1322
+    "priceInr": 2266
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 1286
+    "priceInr": 2204
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 2303
+    "priceInr": 3948
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 2077
+    "priceInr": 3560
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 2070
+    "priceInr": 3548
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 3919
+    "priceInr": 6719
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 3984
+    "priceInr": 6830
   },
   {
     "category": "jewelry",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 4512
+    "priceInr": 7735
   },
   {
     "category": "wood",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 270
+    "priceInr": 450
   },
   {
     "category": "wood",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 349
+    "priceInr": 582
   },
   {
     "category": "wood",
     "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 370
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 516
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 434
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 550
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 837
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 1113
-  },
-  {
-    "category": "wood",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 1003
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 505
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 435
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 554
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 739
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 876
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 942
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1857
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1970
-  },
-  {
-    "category": "wood",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1540
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 2051
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1721
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1938
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 2797
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 3511
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 2834
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 5451
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 6417
-  },
-  {
-    "category": "wood",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 4664
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 166
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 113
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 119
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 183
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 184
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 256
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 286
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 344
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 364
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 183
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 179
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 176
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 318
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 402
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 343
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 551
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 569
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 874
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 940
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 906
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 588
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 1369
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 930
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 1104
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 2515
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 2202
-  },
-  {
-    "category": "bamboo",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 2290
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 279
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 285
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 349
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 428
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 412
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 516
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 585
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 777
-  },
-  {
-    "category": "metal",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 745
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
     "sizeTier": 0,
     "priceInr": 617
   },
   {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 478
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 536
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 783
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 848
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 636
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1328
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1309
-  },
-  {
-    "category": "metal",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1739
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1637
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1397
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1784
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 3157
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 3210
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 2445
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 5491
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 5557
-  },
-  {
-    "category": "metal",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 5425
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 415
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 321
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 336
-  },
-  {
-    "category": "embroidery",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 536
+    "priceInr": 860
   },
   {
-    "category": "embroidery",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 644
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 515
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 1200
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 1168
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 0,
-    "sizeTier": 2,
-    "priceInr": 905
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 520
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 0,
-    "priceInr": 531
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 0,
     "priceInr": 723
   },
   {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 1264
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 1104
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 1,
-    "priceInr": 964
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 2564
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 1716
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 1,
-    "sizeTier": 2,
-    "priceInr": 2150
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 2305
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1958
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 0,
-    "priceInr": 1630
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 2644
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 3349
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 1,
-    "priceInr": 3014
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 5411
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 6699
-  },
-  {
-    "category": "embroidery",
-    "qualityTier": 2,
-    "sizeTier": 2,
-    "priceInr": 7042
-  },
-  {
-    "category": "leather",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 485
-  },
-  {
-    "category": "leather",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 294
-  },
-  {
-    "category": "leather",
-    "qualityTier": 0,
-    "sizeTier": 0,
-    "priceInr": 375
-  },
-  {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 594
+    "priceInr": 917
   },
   {
-    "category": "leather",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 577
-  },
-  {
-    "category": "leather",
-    "qualityTier": 0,
-    "sizeTier": 1,
-    "priceInr": 694
-  },
-  {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 1160
+    "priceInr": 1395
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 1188
+    "priceInr": 1856
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 1009
+    "priceInr": 1672
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 855
+    "priceInr": 841
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 598
+    "priceInr": 725
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 0,
-    "priceInr": 674
+    "priceInr": 923
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1304
+    "priceInr": 1231
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1305
+    "priceInr": 1461
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1021
+    "priceInr": 1570
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 2105
+    "priceInr": 3095
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 2406
+    "priceInr": 3284
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 1824
+    "priceInr": 2567
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2347
+    "priceInr": 3418
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2114
+    "priceInr": 2868
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2504
+    "priceInr": 3230
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 3598
+    "priceInr": 4661
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 4696
+    "priceInr": 5851
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 3546
+    "priceInr": 4723
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 6914
+    "priceInr": 9084
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 6397
+    "priceInr": 10694
   },
   {
-    "category": "leather",
+    "category": "wood",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 5821
+    "priceInr": 7773
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 564
+    "priceInr": 237
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 568
+    "priceInr": 162
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 0,
-    "priceInr": 712
+    "priceInr": 170
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 678
+    "priceInr": 262
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 775
+    "priceInr": 264
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 1,
-    "priceInr": 810
+    "priceInr": 366
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 2166
+    "priceInr": 408
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
     "sizeTier": 2,
-    "priceInr": 1545
+    "priceInr": 492
   },
   {
-    "category": "painting",
+    "category": "bamboo",
     "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 520
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 262
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 255
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 251
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 454
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 574
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 491
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 787
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 813
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 1,
     "sizeTier": 2,
     "priceInr": 1249
   },
   {
-    "category": "painting",
-    "qualityTier": 1,
+    "category": "bamboo",
+    "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 865
+    "priceInr": 1342
   },
   {
-    "category": "painting",
-    "qualityTier": 1,
+    "category": "bamboo",
+    "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 958
+    "priceInr": 1294
   },
   {
-    "category": "painting",
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 840
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 1956
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 1328
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 1577
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 3592
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 3145
+  },
+  {
+    "category": "bamboo",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 3271
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 419
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 427
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 523
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 641
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 618
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 774
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 878
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 1165
+  },
+  {
+    "category": "metal",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 1118
+  },
+  {
+    "category": "metal",
     "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 925
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 717
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 803
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 1174
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 1272
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 955
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 1992
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 1964
+  },
+  {
+    "category": "metal",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 2609
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 2455
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 2095
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 2676
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 4735
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 4815
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 3668
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 8236
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 8335
+  },
+  {
+    "category": "metal",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 8137
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 291
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 225
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 235
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 375
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 451
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 361
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 840
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 818
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 634
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 364
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 372
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 506
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 885
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 773
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 675
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 1794
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 1201
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 1505
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 1613
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 1371
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
     "sizeTier": 0,
     "priceInr": 1141
   },
   {
-    "category": "painting",
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 1851
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 2344
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 2110
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 3788
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 4689
+  },
+  {
+    "category": "embroidery",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 4929
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 882
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 535
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 681
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 1080
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 1048
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 1261
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 2108
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 2159
+  },
+  {
+    "category": "leather",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 1834
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 1555
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 1088
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 1225
+  },
+  {
+    "category": "leather",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1517
+    "priceInr": 2371
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 2373
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 1856
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 3827
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 4374
+  },
+  {
+    "category": "leather",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 3317
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 4268
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 3843
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 4552
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 6542
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 8539
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 6448
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 12571
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 11632
+  },
+  {
+    "category": "leather",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 10584
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 317
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 319
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 401
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 382
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 436
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 456
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 1218
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 869
+  },
+  {
+    "category": "painting",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 702
+  },
+  {
+    "category": "painting",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 487
+  },
+  {
+    "category": "painting",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 539
+  },
+  {
+    "category": "painting",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 642
   },
   {
     "category": "painting",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1597
+    "priceInr": 853
   },
   {
     "category": "painting",
     "qualityTier": 1,
     "sizeTier": 1,
-    "priceInr": 1896
+    "priceInr": 898
+  },
+  {
+    "category": "painting",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 1067
   },
   {
     "category": "painting",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 3352
+    "priceInr": 1885
   },
   {
     "category": "painting",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 2977
+    "priceInr": 1674
   },
   {
     "category": "painting",
     "qualityTier": 1,
     "sizeTier": 2,
-    "priceInr": 3114
+    "priceInr": 1751
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2393
+    "priceInr": 1346
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2773
+    "priceInr": 1560
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 0,
-    "priceInr": 2750
+    "priceInr": 1547
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 4601
+    "priceInr": 2588
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 4866
+    "priceInr": 2737
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 1,
-    "priceInr": 4537
+    "priceInr": 2552
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 8340
+    "priceInr": 4691
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 11223
+    "priceInr": 6313
   },
   {
     "category": "painting",
     "qualityTier": 2,
     "sizeTier": 2,
-    "priceInr": 8434
+    "priceInr": 4744
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 46
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 35
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 0,
+    "priceInr": 42
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 83
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 77
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 1,
+    "priceInr": 95
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 140
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 226
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 0,
+    "sizeTier": 2,
+    "priceInr": 107
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 84
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 79
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 0,
+    "priceInr": 86
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 154
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 152
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 1,
+    "priceInr": 153
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 354
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 282
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 1,
+    "sizeTier": 2,
+    "priceInr": 315
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 313
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 345
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 0,
+    "priceInr": 362
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 510
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 416
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 1,
+    "priceInr": 572
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 962
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 851
+  },
+  {
+    "category": "accessories",
+    "qualityTier": 2,
+    "sizeTier": 2,
+    "priceInr": 1086
   }
 ]

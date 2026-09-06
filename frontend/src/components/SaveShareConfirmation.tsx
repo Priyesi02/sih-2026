@@ -7,7 +7,19 @@ import { CheckCircle2, AlertTriangle, Share2 } from 'lucide-react-native';
 import { colors, spacing, radii, fonts } from '../theme';
 import { shareVideoNow, SaveVideoResult } from '../utils/saveVideoAndCaption';
 
-export function SaveShareConfirmation({ result, videoUri }: { result: SaveVideoResult; videoUri: string }) {
+// mediaLabel lets this same component/copy work for either the video
+// or the poster save/share flow (see ListingReviewScreen) — the
+// underlying save/share logic (expo-media-library, expo-sharing)
+// doesn't care whether the file is an .mp4 or a .png.
+export function SaveShareConfirmation({
+  result,
+  videoUri,
+  mediaLabel = 'Video',
+}: {
+  result: SaveVideoResult;
+  videoUri: string;
+  mediaLabel?: string;
+}) {
   async function handleShareNow() {
     try {
       await shareVideoNow(videoUri);
@@ -21,7 +33,7 @@ export function SaveShareConfirmation({ result, videoUri }: { result: SaveVideoR
       {result.videoSaved && (
         <View style={styles.row}>
           <CheckCircle2 size={16} color={colors.statusLive} />
-          <Text style={styles.successText}>Video saved to gallery</Text>
+          <Text style={styles.successText}>{mediaLabel} saved to gallery</Text>
         </View>
       )}
 
@@ -36,7 +48,7 @@ export function SaveShareConfirmation({ result, videoUri }: { result: SaveVideoR
         <View style={styles.warningBox}>
           <AlertTriangle size={16} color={colors.statusReview} />
           <Text style={styles.warningText}>
-            Gallery access wasn't allowed, so the video wasn't saved to your phone. You can still tap "Share Now"
+            Gallery access wasn't allowed, so the {mediaLabel.toLowerCase()} wasn't saved to your phone. You can still tap "Share Now"
             below to send it directly — saving to your gallery first isn't required.
           </Text>
         </View>

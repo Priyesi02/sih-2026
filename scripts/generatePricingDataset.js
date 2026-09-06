@@ -33,18 +33,24 @@
 const fs = require('fs');
 const path = require('path');
 
-// Same 9 categories used elsewhere in the pipeline (lib/pricingReference.js).
+// Same categories used elsewhere in the pipeline (lib/pricingReference.js).
 // basePrice = typical price (INR) for a MID-quality, MEDIUM-size item.
+// RECALIBRATED (Sept 2026) against real market research — see
+// lib/pricingReference.js's file header for the sources/figures behind
+// each of these. "accessories" is a NEW category added at the same
+// time, for small items (scrunchies, potli bags, keychains) that used
+// to get miscategorized into "handloom textile" and wildly overpriced.
 const CATEGORY_BASE_PRICES = {
-  pottery: 220,
-  'handloom textile': 2200,
-  jewelry: 700,
-  wood: 900,
-  bamboo: 350,
-  metal: 800,
-  embroidery: 1000,
-  leather: 1100,
-  painting: 1600,
+  pottery: 280,
+  'handloom textile': 2000,
+  jewelry: 1200,
+  wood: 1500,
+  bamboo: 500,
+  metal: 1200,
+  embroidery: 700,
+  leather: 2000,
+  painting: 900,
+  accessories: 150,
 };
 
 // qualityTier: 0 = basic, 1 = mid, 2 = premium (e.g. pure silk, real
@@ -55,7 +61,7 @@ const QUALITY_MULTIPLIER = { 0: 0.55, 1: 1.0, 2: 3.4 };
 const SIZE_MULTIPLIER = { 0: 0.6, 1: 1.0, 2: 1.85 };
 
 const NOISE_STDDEV = 0.15; // ~15% log-normal jitter, simulates real-world variance
-const SAMPLES_PER_COMBINATION = 3; // 9 categories * 3 quality * 3 size * 3 samples = 243 rows
+const SAMPLES_PER_COMBINATION = 3; // 10 categories * 3 quality * 3 size * 3 samples = 270 rows
 
 // --- deterministic PRNG so the dataset is reproducible (mulberry32) ---
 function mulberry32(seed) {
